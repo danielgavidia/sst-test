@@ -18,6 +18,21 @@ export async function handler() {
     // column called "tally"
     let count = results.Item ? results.Item.tally : 0;
 
+    // New additions
+    const putParams = {
+        TableName: Table.Counter.tableName,
+        Key: {
+            counter: "clicks",
+        },
+        // Update the "tally" column
+        UpdateExpression: "SET tally = :count",
+        ExpressionAttributeValues: {
+            // Increase the count
+            ":count": ++count,
+        },
+    };
+    await dynamoDb.update(putParams).promise();
+
     return {
         statusCode: 200,
         body: count,
