@@ -7,7 +7,7 @@ export async function handler() {
     const getParams = {
         // Get the table name from the environment variable
         TableName: Table.Counter.tableName,
-        // Get the the row where the counter is called "clicks"
+        // Get the row where the counter is called "clicks"
         Key: {
             counter: "clicks",
         },
@@ -18,7 +18,6 @@ export async function handler() {
     // column called "tally"
     let count = results.Item ? results.Item.tally : 0;
 
-    // New additions
     const putParams = {
         TableName: Table.Counter.tableName,
         Key: {
